@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Bio One</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+  <div class="login-container">
+    <h2>Masuk ke Akun</h2>
+    
+    <form onsubmit="return handleLogin(event)">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Kata Sandi</label>
+      <input type="password" id="password" name="password" required>
+	  <p>Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+	  <button onclick="loginBerhasil()">Login</button>
+
+	  
+    </form>
+  </div>
+  
+  <script>
+  function handleLogin(event) {
+    event.preventDefault();
+
+    // Simulasikan login berhasil
+    localStorage.setItem("loggedIn", "true");
+
+    // Redirect ke halaman about
+    window.location.href = "about.html";
+    return false;
+  }
+	</script>
+	<script>
+  function loginBerhasil() {
+    localStorage.setItem("isLoggedIn", "true");
+    window.location.href = "about.html";
+  }
+</script>
+
+<script>
+  // Simpan status login
+  function loginBerhasil() {
+    localStorage.setItem("isLoggedIn", "true");
+    // simpan nama user jika perlu
+    // localStorage.setItem("user", "namaUser");
+    window.location.href = "about.html";
+  }
+</script>
+</body>
+</html>
