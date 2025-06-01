@@ -2,53 +2,55 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Login - Bio One</title>
+  <title>Login Website Bio One</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
-<body class="login-body">
+<body>
   <div class="login-container">
-    <h2>Masuk ke Akun</h2>
-    
-    <form onsubmit="return handleLogin(event)">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+    <h2>Login ke Website</h2>
 
-      <label for="password">Kata Sandi</label>
-      <input type="password" id="password" name="password" required>
-	  <p>Belum punya akun? <a href="register.html">Daftar di sini</a></p>
-	  <button onclick="loginBerhasil()">Login</button>
+    <input type="text" id="username" placeholder="Nama Pengguna">
+    <input type="password" id="password" placeholder="Kata Sandi">
+    <button onclick="loginManual()">Login Manual</button>
 
-	  
-    </form>
+    <div class="divider"></div>
+
+    <div id="g_id_onload"
+         data-client_id="76934902395-26iqn3urk6tooo6a5g3kto033ake21vr.apps.googleusercontent.com"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="rectangular"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-size="large"
+         data-logo_alignment="left">
+    </div>
   </div>
-  
+
   <script>
-  function handleLogin(event) {
-    event.preventDefault();
+    function loginManual() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
 
-    // Simulasikan login berhasil
-    localStorage.setItem("loggedIn", "true");
+      if (user === "admin" && pass === "admin123") {
+        localStorage.setItem("isLoggedIn", "true");
+        window.location.href = "about.html";
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
 
-    // Redirect ke halaman about
-    window.location.href = "about.html";
-    return false;
-  }
-	</script>
-	<script>
-  function loginBerhasil() {
-    localStorage.setItem("isLoggedIn", "true");
-    window.location.href = "about.html";
-  }
-</script>
-
-<script>
-  // Simpan status login
-  function loginBerhasil() {
-    localStorage.setItem("isLoggedIn", "true");
-    // simpan nama user jika perlu
-    // localStorage.setItem("user", "namaUser");
-    window.location.href = "about.html";
-  }
-</script>
+    function handleCredentialResponse(response) {
+      console.log("Google JWT: " + response.credential);
+      localStorage.setItem("isLoggedIn", "true");
+      window.location.href = "about.html";
+    }
+  </script>
 </body>
 </html>
